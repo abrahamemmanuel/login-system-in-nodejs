@@ -1,12 +1,10 @@
+import request from 'supertest';
+import app from '../server';
 
-import app from "../server.js";
-import request from "supertest";
-
-
-describe("homepage", () => {
-    it("Welcomes the user",(done)=>{
-        request(app).get("/")
-          .expect(200)
-          .expect(/Welcome To Fast Food Fast/, done)
-    })
-})
+describe('homepage', () => {
+  it('Welcomes the user', (done) => {
+    request(app).get('/')
+      .expect(200)
+      .expect(/Welcome To Nodejs Login System/, done);
+  });
+});

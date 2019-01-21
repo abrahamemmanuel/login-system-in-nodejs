@@ -1,10 +1,24 @@
 import express from 'express';
+import expressLayouts from 'express-ejs-layouts';
+import mongoose from 'mongoose';
+import key from './config/keys';
+import router from './routes/index';
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
-app.get('/', (req, res) => res.status(200).json({ success: 'Welcome To Fast Food Fast' }));
+// // EJS
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
 
-if (!module.parent) { app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); }// eslint-disable-line no-console
+// Routes
+app.use(router);
+
+// DB Config
+const db = key.mongoURI;
+
+// Connect to MongoDB
+mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
+
+if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
 export default app;
