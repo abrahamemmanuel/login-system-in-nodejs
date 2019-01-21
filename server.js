@@ -6,9 +6,12 @@ import router from './routes/index';
 
 const app = express();
 
-// // EJS
+// EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+
+// Bodyparser
+app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use(router);
@@ -17,7 +20,7 @@ app.use(router);
 const db = key.mongoURI;
 
 // Connect to MongoDB
-mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
+mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
 
 if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 

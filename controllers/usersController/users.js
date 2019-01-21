@@ -1,15 +1,72 @@
 /* eslint-disable class-methods-use-this */
+import bcrypt from 'bcryptjs';
+import User from '../../models/User';
+
+
 class UsersController {
   getIndex(req, res) {
-    res.send('Welcome !');
+    res.render('welcome');
   }
 
-  register(req, res){
-    res.send('Reister');
+  getRegistrationPage(req, res) {
+    res.render('register');
   }
 
-  login(req, res){
-    res.send('Login');
+ registerUser(req, res) {
+   const { name, email, password, password2 } = req.body;
+   let errors = [];
+
+   // Check required fields
+   if(!name || !email || !password || !password2) {
+     errors.push({ msg: 'Please fill in all fields' });
+   }
+
+    // Check passwords match
+    if(password !== password2) {
+      errors.push({ msg: 'Passwords do not match' });
+    }
+
+    // Check pass length
+    if(password.length < 6) {
+      errors.push({ msg: 'Password should be at least 6 characters' });
+    }
+
+    if(errors.length > 0) {
+      res.render('register', {errors, name, email, password, password2});
+    } else {
+      // Validation passed
+      User.findOne({ email: email })
+        .then(user => {
+           if(user) {
+             // User exists
+             errors.push({ msg: 'User already exist' });
+             res.render('register', { errors, name, email, password, password2});
+           } else {
+            const newUser = new User({
+              name,
+              email,
+              password
+            });
+         
+            // Hash password
+            bcrypt.genSalt(10, (err, salt) => bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if(err) throw err;
+              // Set password to hashed
+              newUser.password = hash;
+              // Save user
+              newUser.save()
+                 .then(user => {
+                   res.redirect('/users/login');
+                 })
+                 .catch(err => console.log(err));
+            }));
+           }
+        });
+    }
+ }
+
+  login(req, res) {
+    res.render('login');
   }
 }
 
