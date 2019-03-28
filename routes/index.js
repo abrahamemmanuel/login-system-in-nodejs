@@ -4,31 +4,31 @@ import UserController from '../controllers/usersController/users';
 
 const router = express.Router();
 
-// @route   '/dashboard
+// @route   /dashboard
 // @desc     User dashboard view
 // @access   Private
 // @method   GET
 router.get('/dashboard', ensureAuthenticated, UserController.dashboard);
 
-// @route   '/users/register
+// @route   /users/register
 // @desc     Get  User registration page
 // @access   Public
 // @method   GET
 router.get('/users/register', UserController.getRegistrationPage);
 
-// @route   '/users/register
+// @route   /users/register
 // @desc     Register User
 // @access   Public
 // @method   POST
 router.post('/users/register', UserController.registerUser);
 
-// @route   '/users/login
+// @route   /users/login
 // @desc     Get User Login page
 // @access   Public
 // @method   GET
 router.get('/users/login', UserController.getLoginPage);
 
-// @route   '/users/login
+// @route   /users/login
 // @desc     Login User
 // @access   Public
 // @method   POST

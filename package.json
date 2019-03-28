@@ -45,6 +45,9 @@
     "nyc": "^13.1.0",
     "supertest": "^3.3.0"
   },
+  "engines": {
+    "node": "10.14.2"
+  },
   "nodemonConfig": {
     "restartable": "rs",
     "delay": "2500"
