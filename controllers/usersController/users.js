@@ -1,18 +1,17 @@
 /* eslint-disable class-methods-use-this */
+import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import User from '../../models/User';
 
 
 class UsersController {
-  getIndex(req, res) {
-    res.render('welcome');
-  }
 
   getRegistrationPage(req, res) {
     res.render('register');
   }
-
- registerUser(req, res) {
+  
+  registerUser(req, res) {
+   
    const { name, email, password, password2 } = req.body;
    let errors = [];
 
@@ -39,7 +38,7 @@ class UsersController {
         .then(user => {
            if(user) {
              // User exists
-             errors.push({ msg: 'User already exist' });
+             errors.push({ msg: 'User already exist with this email' });
              res.render('register', { errors, name, email, password, password2});
            } else {
             const newUser = new User({
@@ -56,6 +55,7 @@ class UsersController {
               // Save user
               newUser.save()
                  .then(user => {
+                   req.flash('success_msg', 'You are now registered and can log in');
                    res.redirect('/users/login');
                  })
                  .catch(err => console.log(err));
@@ -65,9 +65,28 @@ class UsersController {
     }
  }
 
-  login(req, res) {
+getLoginPage(req, res) {
     res.render('login');
   }
+
+dashboard(req, res) {
+  res.render('dashboard', { user: req.user })
+}  
+
+login(req, res, next) {
+ passport.authenticate('local', {
+   successRedirect: '/dashboard',
+   failureRedirect: '/users/login',
+   failureFlash: true
+ })(req, res, next);
+}
+
+logout(req, res) {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/users/login');
+}
+
 }
 
 const UserController = new UsersController();
