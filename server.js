@@ -4,8 +4,8 @@ import expressLayouts from 'express-ejs-layouts';
 import flash from 'connect-flash';
 import session from 'express-session';
 import mongoose from 'mongoose';
-import key from '../config/keys';
-import router from '../routes/index';
+import key from './config/keys';
+import router from './routes/index';
 
 const app = express();
 
