@@ -56,6 +56,8 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 
 app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
 
-app.get('/', (req, res) => res.render(login));
+app.get('/', (req, res) => 
+res.setHeader('Content-Type', 'text/html'),
+res.end('<h1>Hello World</h1>'));
 
 export default app;
