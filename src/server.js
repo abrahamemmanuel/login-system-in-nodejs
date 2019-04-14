@@ -6,6 +6,7 @@ import session from 'express-session';
 import mongoose from 'mongoose';
 import key from './config/keys';
 import router from './routes/index';
+import path from 'path';
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Connect flash
+// Connect flashhero
 app.use(flash());
 
 // Global Vars
@@ -54,10 +55,8 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 
 // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
-app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
+app.get('/aqueous-depths-31554.herokuapp.com/users/login', (req, res) => res.render(login));
 
-app.get('/', (req, res) => 
-res.setHeader('Content-Type', 'text/html'),
-res.end('<h1>Hello World</h1>'));
+app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
 
 export default app;
