@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc mocha",
     "cover": "nyc report --reporter=text-lcov | coveralls",
-    "dev": "nodemon server.js --exec babel-node",
+    "dev": "nodemon ./build/server.js --exec babel-node",
     "heroku-postbuild": "npm install",
     "lint": "eslint **/*.js",
     "clean": "rm -rf build && mkdir build",
