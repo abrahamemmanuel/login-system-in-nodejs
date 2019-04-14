@@ -54,6 +54,8 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 
 // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
-app.listen(key.env, () => console.log(`Server running on port ${key.env}`));
+app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
+
+app.get('/', (req, res) => res.render(login));
 
 export default app;
