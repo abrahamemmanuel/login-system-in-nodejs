@@ -55,7 +55,7 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 
 // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
-app.get('/aqueous-depths-31554.herokuapp.com/users/login', (req, res) => res.render(login));
+app.get('/https://aqueous-depths-31554.herokuapp.com/aqueous-depths-31554.herokuapp.com/users/login', (req, res) => res.render(login));
 
 app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
 
