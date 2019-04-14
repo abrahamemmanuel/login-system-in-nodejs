@@ -52,6 +52,8 @@ const db = key.mongoURI;
 // Connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
 
-if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
+// if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
+
+app.listen(key.env, () => console.log(`Server running on port ${key.env}`));
 
 export default app;
