@@ -55,8 +55,8 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 
 // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
-app.get('/', (req, res) => {
-  return res.redirect('/users/login')
+app.get('/users/login', (req, res) => {
+  return res.render('login') 
 });
 
 app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
