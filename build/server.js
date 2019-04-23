@@ -21,6 +21,8 @@ var _keys = _interopRequireDefault(require("./config/keys"));
 
 var _index = _interopRequireDefault(require("./routes/index"));
 
+var _path = _interopRequireDefault(require("path"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express.default)(); // Passport Config
@@ -42,7 +44,7 @@ app.use((0, _expressSession.default)({
 })); //Passport middleware
 
 app.use(_passport.default.initialize());
-app.use(_passport.default.session()); // Connect flash
+app.use(_passport.default.session()); // Connect flashhero
 
 app.use((0, _connectFlash.default)()); // Global Vars
 
@@ -63,15 +65,15 @@ _mongoose.default.connect(db, {
   return console.log('MongoDB Connected...');
 }).catch(function (err) {
   return console.log(err);
+}); // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
+
+
+app.get('/https://aqueous-depths-31554.herokuapp.com/aqueous-depths-31554.herokuapp.com/users/login', function (req, res) {
+  return res.render(login);
 });
-
-if (!module.parent) {
-  app.listen(_keys.default.env, function () {
-    return console.log("Server running on port ".concat(_keys.default.env));
-  });
-} // eslint-disable-line no-console
-
-
+app.listen(_keys.default.env, function () {
+  console.log("Server running on port ".concat(_keys.default.env));
+});
 var _default = app;
 exports.default = _default;
 //# sourceMappingURL=server.js.map
