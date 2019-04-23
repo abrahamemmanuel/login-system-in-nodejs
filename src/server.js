@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 app.use(router);
 
 // DB Config
-const db = key.mongoURI;
+const db = process.env.MONGODB_URI || key.LOCAL_URI;
 
 // Connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
