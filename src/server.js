@@ -29,14 +29,21 @@ app.set('view engine', 'ejs');
 // Bodyparser
 app.use(express.urlencoded({ extended: true }));
 
+//-momery unleaked---------
+app.set('trust proxy', 1);
+
 // Express session
-app.use(
-    session({
-      secret: 'secret',
-      resave: true,
-      saveUninitialized: true
-    })
-  );
+app.use(session({
+  cookie:{
+      secure: true,
+      maxAge:60000
+         },
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: false
+  }));
+
+
 
 //Passport middleware
 app.use(passport.initialize());
@@ -47,6 +54,9 @@ app.use(flash());
 
 // Global Vars
 app.use((req, res, next) => {
+  if(!req.session){
+    return next(new Error('Oops an error occured')) //handle error
+}
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -67,6 +77,7 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 // @route   /
 // @desc     Get the landing page
 // @access   Public
+
 // @method   GET
 
 app.get('/', (req, res) => {

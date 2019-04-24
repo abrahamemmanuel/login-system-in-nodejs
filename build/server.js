@@ -41,12 +41,18 @@ app.set('view engine', 'ejs'); // // EJS
 
 app.use(_express.default.urlencoded({
   extended: true
-})); // Express session
+})); //-momery unleaked---------
+
+app.set('trust proxy', 1); // Express session
 
 app.use((0, _expressSession.default)({
+  cookie: {
+    secure: true,
+    maxAge: 60000
+  },
   secret: 'secret',
-  resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  resave: false
 })); //Passport middleware
 
 app.use(_passport.default.initialize());
@@ -55,6 +61,10 @@ app.use(_passport.default.session()); // Connect flashhero
 app.use((0, _connectFlash.default)()); // Global Vars
 
 app.use(function (req, res, next) {
+  if (!req.session) {
+    return next(new Error('Oops an error occured')); //handle error
+  }
+
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
