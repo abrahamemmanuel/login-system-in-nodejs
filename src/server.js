@@ -16,8 +16,7 @@ require('./config/passport')(passport);
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
-//Set View Engine
-app.set('views', '../views');
+
 
 
 // Bodyparser
@@ -59,7 +58,7 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
 app.get('/', (req, res) => {
-  return res.render('index');
+   res.render('index');
 });
 
 app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
