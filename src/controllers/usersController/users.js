@@ -69,6 +69,10 @@ getLoginPage(req, res) {
     res.render('login');
   }
 
+getWelcomePage(req, res) {
+    res.render('welcome');
+  }
+
 dashboard(req, res) {
   res.render('dashboard', { user: req.user })
 }  

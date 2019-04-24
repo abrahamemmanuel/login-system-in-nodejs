@@ -6,15 +6,10 @@ import UserController from '../controllers/usersController/users';
 const router = express.Router();
 
 // @route   /
-// @desc     Get the landing page
+// @desc     Get  User Welcome page
 // @access   Public
 // @method   GET
-
-router.get('/', (req, res) => {
-  return  res.render('login');
- });
-
-// router.get('/', UserController.getLoginPage);
+router.get('/', UserController.getWelcomePage);
 
 // @route   /dashboard
 // @desc     User dashboard view
