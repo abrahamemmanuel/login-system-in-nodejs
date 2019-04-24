@@ -14,10 +14,10 @@ const app = express();
 require('./config/passport')(passport);
 
 //Static folder
-app.use(express.static(path.join(__dirname, '/public/')));
-app.use('/css', express.static(path.join(__dirname, 'public/css')));
+app.use(express.static(path.join(__dirname, '../public/')));
+app.use('/css', express.static(path.join(__dirname, '../public/css')));
 //Set View Engine
-app.set('views', './views');
+app.set('views', '../views');
 app.set('view engine', 'ejs');
 
 // // EJS
