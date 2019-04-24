@@ -48,15 +48,15 @@ app.use((req, res, next) => {
 app.use(router);
 
 // DB Config
-const db = process.env.MONGODB_URI || key.LOCAL_URI;
+const db = process.env.MONGODB_URI || key.LOCALDB_URI;
 
 // Connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
 
 // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
-app.get('/users/login', (req, res) => {
-  return res.render('login') 
+app.get('/', (req, res) => {
+  return res.render('index');
 });
 
 app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
