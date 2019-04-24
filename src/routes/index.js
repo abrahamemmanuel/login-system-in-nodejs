@@ -10,7 +10,7 @@ const router = express.Router();
 // @access   Public
 // @method   GET
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   return  res.render('index');
  });
 
