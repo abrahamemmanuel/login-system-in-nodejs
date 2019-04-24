@@ -1,4 +1,5 @@
 import express from 'express';
+import app from '../server.js';
 import { ensureAuthenticated } from '../config/auth';
 import UserController from '../controllers/usersController/users';
 
@@ -8,7 +9,12 @@ const router = express.Router();
 // @desc     Get the landing page
 // @access   Public
 // @method   GET
-router.get('/', UserController.getLoginPage);
+
+app.get('/', (req, res) => {
+  return  res.render('index');
+ });
+
+// router.get('/', UserController.getLoginPage);
 
 // @route   /dashboard
 // @desc     User dashboard view
