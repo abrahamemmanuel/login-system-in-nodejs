@@ -69,7 +69,7 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 // @access   Public
 // @method   GET
 
-app.get('/welcome', (req, res) => {
+app.get('/users/welcome', (req, res) => {
   return  res.render('welcome');
  });
 

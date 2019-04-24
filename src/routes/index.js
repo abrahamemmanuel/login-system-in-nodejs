@@ -9,7 +9,7 @@ const router = express.Router();
 // @desc     Get  User Welcome page
 // @access   Public
 // @method   GET
-router.get('/welcome', UserController.getWelcomePage);
+router.get('/users/welcome', UserController.getWelcomePage);
 
 // @route   /dashboard
 // @desc     User dashboard view
