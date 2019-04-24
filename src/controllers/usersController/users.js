@@ -66,7 +66,7 @@ class UsersController {
  }
 
 getLoginPage(req, res) {
-    res.render('login');
+    res.render('welcome');
   }
 
 getWelcomePage(req, res) {
