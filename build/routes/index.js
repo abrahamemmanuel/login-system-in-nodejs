@@ -7,17 +7,24 @@ exports.default = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
+var _server = _interopRequireDefault(require("../server.js"));
+
 var _auth = require("../config/auth");
 
 var _users = _interopRequireDefault(require("../controllers/usersController/users"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var router = _express.default.Router(); // @route   /dashboard
+var router = _express.default.Router(); // @route   /
+// @desc     Get  User Welcome page
+// @access   Public
+// @method   GET
+
+
+router.get('/welcome', _users.default.getWelcomePage); // @route   /dashboard
 // @desc     User dashboard view
 // @access   Private
 // @method   GET
-
 
 router.get('/dashboard', _auth.ensureAuthenticated, _users.default.dashboard); // @route   /users/register
 // @desc     Get  User registration page

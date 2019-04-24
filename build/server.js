@@ -27,11 +27,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express.default)(); // Passport Config
 
-require('./config/passport')(_passport.default); // EJS
+require('./config/passport')(_passport.default); //Static folder
 
 
-app.use(_expressEjsLayouts.default);
-app.set('view engine', 'ejs'); // Bodyparser
+app.use(_express.default.static(_path.default.join(__dirname, './public/')));
+app.use('/css', _express.default.static(_path.default.join(__dirname, 'public/css'))); //Set View Engine
+
+app.set('views', './views');
+app.set('view engine', 'ejs'); // // EJS
+// app.use(expressLayouts);
+// app.set('view engine', 'ejs');
+// Bodyparser
 
 app.use(_express.default.urlencoded({
   extended: true
@@ -57,7 +63,7 @@ app.use(function (req, res, next) {
 
 app.use(_index.default); // DB Config
 
-var db = process.env.MONGODB_URI || _keys.default.LOCAL_URI; // Connect to MongoDB
+var db = process.env.MONGODB_URI || _keys.default.LOCALDB_URI; // Connect to MongoDB
 
 _mongoose.default.connect(db, {
   useNewUrlParser: true
@@ -65,15 +71,24 @@ _mongoose.default.connect(db, {
   return console.log('MongoDB Connected...');
 }).catch(function (err) {
   return console.log(err);
-}); // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
+}); // @route   /
+// @desc     Get the landing page
+// @access   Public
+// @method   GET
 
 
-app.get('/users/login', function (req, res) {
-  return res.render('login');
+app.get('/', function (req, res) {
+  return res.render('welcome');
 });
-app.listen(_keys.default.env, function () {
-  console.log("Server running on port ".concat(_keys.default.env));
-});
+
+if (!module.parent) {
+  app.listen(_keys.default.env, function () {
+    return console.log("Server running on port ".concat(_keys.default.env));
+  });
+} // eslint-disable-line no-console
+// app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
+
+
 var _default = app;
 exports.default = _default;
 //# sourceMappingURL=server.js.map
