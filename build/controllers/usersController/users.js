@@ -114,13 +114,11 @@ function () {
   }, {
     key: "getLoginPage",
     value: function getLoginPage(req, res) {
-      res.render('welcome');
-    }
-  }, {
-    key: "getWelcomePage",
-    value: function getWelcomePage(req, res) {
-      res.render('welcome');
-    }
+      res.render('login');
+    } // getWelcomePage(req, res) {
+    //     res.render('welcome');
+    //   }
+
   }, {
     key: "dashboard",
     value: function dashboard(req, res) {
