@@ -11,7 +11,7 @@ const router = express.Router();
 // @method   GET
 
 router.get('/', (req, res) => {
-  return  res.render('index');
+  return  res.render('login');
  });
 
 // router.get('/', UserController.getLoginPage);
