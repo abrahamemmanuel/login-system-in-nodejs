@@ -63,6 +63,18 @@ const db = process.env.MONGODB_URI || key.LOCALDB_URI;
 mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
 
 
+
+// @route   /
+// @desc     Get the landing page
+// @access   Public
+// @method   GET
+
+app.get('/', (req, res) => {
+  return  res.render('welcome');
+ });
+
+
+
 if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
 // app.listen(key.env, () => {console.log(`Server running on port ${key.env}`)});
