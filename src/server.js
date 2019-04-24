@@ -16,6 +16,9 @@ require('./config/passport')(passport);
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+//Set View Engine
+app.set('views', '../views');
+
 
 // Bodyparser
 app.use(express.urlencoded({ extended: true }));
