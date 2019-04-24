@@ -41,18 +41,38 @@ app.set('view engine', 'ejs'); // // EJS
 
 app.use(_express.default.urlencoded({
   extended: true
-})); //-momery unleaked---------
+})); // Express session
+// app.use(
+//     session({
+//       secret: 'secret',
+//       resave: true,
+//       saveUninitialized: true
+//     })
+//   );
+// SessionStore = require('session-mongoose')(express)
+// app.use(
+//   express.session({
+//     store: new SessionStore({
+//     url: db,
+//     interval: 1200000
+//   }),
+//   cookie: { maxAge: 1200000 },
+//   secret: 'my secret'
+// }))
 
-app.set('trust proxy', 1); // Express session
+var redis = require("redis"),
+    client = redis.createClient();
+
+var RedisStore = require('connect-redis')(_expressSession.default); //var sessionStore = new redisStore({ client : client });
+
 
 app.use((0, _expressSession.default)({
-  cookie: {
-    secure: true,
-    maxAge: 60000
-  },
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: false
+  store: new RedisStore({
+    client: client
+  }),
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
 })); //Passport middleware
 
 app.use(_passport.default.initialize());
@@ -61,10 +81,6 @@ app.use(_passport.default.session()); // Connect flashhero
 app.use((0, _connectFlash.default)()); // Global Vars
 
 app.use(function (req, res, next) {
-  if (!req.session) {
-    return next(new Error('Oops an error occured')); //handle error
-  }
-
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');

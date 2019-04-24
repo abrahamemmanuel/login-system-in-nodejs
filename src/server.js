@@ -1,5 +1,5 @@
 import express from 'express';
-import passport from 'passport'
+import passport from 'passport';
 import expressLayouts from 'express-ejs-layouts';
 import flash from 'connect-flash';
 import session from 'express-session';
@@ -29,20 +29,42 @@ app.set('view engine', 'ejs');
 // Bodyparser
 app.use(express.urlencoded({ extended: true }));
 
-//-momery unleaked---------
-app.set('trust proxy', 1);
+
 
 // Express session
-app.use(session({
-  cookie:{
-      secure: true,
-      maxAge:60000
-         },
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: false
-  }));
+// app.use(
+//     session({
+//       secret: 'secret',
+//       resave: true,
+//       saveUninitialized: true
+//     })
+//   );
 
+// SessionStore = require('session-mongoose')(express)
+
+// app.use(
+//   express.session({
+//     store: new SessionStore({
+//     url: db,
+//     interval: 1200000
+//   }),
+//   cookie: { maxAge: 1200000 },
+//   secret: 'my secret'
+// }))
+
+const redis = require("redis"),
+
+client = redis.createClient();
+
+const RedisStore = require('connect-redis')(session);
+//var sessionStore = new redisStore({ client : client });
+ 
+app.use(session({
+    store: new RedisStore({ client : client }),
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
 
 
 //Passport middleware
@@ -54,9 +76,6 @@ app.use(flash());
 
 // Global Vars
 app.use((req, res, next) => {
-  if(!req.session){
-    return next(new Error('Oops an error occured')) //handle error
-}
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -77,7 +96,6 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 // @route   /
 // @desc     Get the landing page
 // @access   Public
-
 // @method   GET
 
 app.get('/', (req, res) => {
