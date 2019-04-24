@@ -70,7 +70,7 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log('MongoDB 
 // @method   GET
 
 app.get('/', (req, res) => {
-  return  res.render('login');
+  return  res.render('welcome');
  });
 
 
