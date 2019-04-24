@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 
 app.use(_index.default); // DB Config
 
-var db = _keys.default.mongoURI; // Connect to MongoDB
+var db = process.env.MONGODB_URI || _keys.default.LOCAL_URI; // Connect to MongoDB
 
 _mongoose.default.connect(db, {
   useNewUrlParser: true
@@ -68,8 +68,8 @@ _mongoose.default.connect(db, {
 }); // if (!module.parent) { app.listen(key.env, () => console.log(`Server running on port ${key.env}`)); }// eslint-disable-line no-console
 
 
-app.get('/https://aqueous-depths-31554.herokuapp.com/aqueous-depths-31554.herokuapp.com/users/login', function (req, res) {
-  return res.render(login);
+app.get('/users/login', function (req, res) {
+  return res.render('login');
 });
 app.listen(_keys.default.env, function () {
   console.log("Server running on port ".concat(_keys.default.env));
