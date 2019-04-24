@@ -19,12 +19,12 @@ var router = _express.default.Router(); // @route   /
 // @desc     Get  User Welcome page
 // @access   Public
 // @method   GET
-// router.get('/', UserController.getWelcomePage);
-// @route   /dashboard
+
+
+router.get('/', _users.default.getWelcomePage); // @route   /dashboard
 // @desc     User dashboard view
 // @access   Private
 // @method   GET
-
 
 router.get('/dashboard', _auth.ensureAuthenticated, _users.default.dashboard); // @route   /users/register
 // @desc     Get  User registration page

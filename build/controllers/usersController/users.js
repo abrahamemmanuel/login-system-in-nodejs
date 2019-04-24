@@ -114,7 +114,7 @@ function () {
   }, {
     key: "getLoginPage",
     value: function getLoginPage(req, res) {
-      res.render('login');
+      res.render('welcome');
     }
   }, {
     key: "getWelcomePage",

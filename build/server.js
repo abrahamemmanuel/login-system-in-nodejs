@@ -71,6 +71,14 @@ _mongoose.default.connect(db, {
   return console.log('MongoDB Connected...');
 }).catch(function (err) {
   return console.log(err);
+}); // @route   /
+// @desc     Get the landing page
+// @access   Public
+// @method   GET
+
+
+app.get('/', function (req, res) {
+  return res.render('welcome');
 });
 
 if (!module.parent) {
