@@ -62,7 +62,7 @@ const RedisStore = require('connect-redis')(session);
 app.use(session({
     store: new RedisStore({ client : client }),
     secret: 'keyboard cat',
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 

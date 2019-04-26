@@ -71,7 +71,7 @@ app.use((0, _expressSession.default)({
     client: client
   }),
   secret: 'keyboard cat',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 })); //Passport middleware
 
