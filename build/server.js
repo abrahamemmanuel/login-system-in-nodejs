@@ -41,15 +41,13 @@ app.set('view engine', 'ejs'); // // EJS
 
 app.use(_express.default.urlencoded({
   extended: true
-})); // Express session
-// app.use(
-//     session({
-//       secret: 'secret',
-//       resave: true,
-//       saveUninitialized: true
-//     })
-//   );
-// SessionStore = require('session-mongoose')(express)
+})); //Express session
+
+app.use((0, _expressSession.default)({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+})); // SessionStore = require('session-mongoose')(express)
 // app.use(
 //   express.session({
 //     store: new SessionStore({
@@ -59,21 +57,17 @@ app.use(_express.default.urlencoded({
 //   cookie: { maxAge: 1200000 },
 //   secret: 'my secret'
 // }))
-
-var redis = require("redis"),
-    client = redis.createClient();
-
-var RedisStore = require('connect-redis')(_expressSession.default); //var sessionStore = new redisStore({ client : client });
-
-
-app.use((0, _expressSession.default)({
-  store: new RedisStore({
-    client: client
-  }),
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-})); //Passport middleware
+// const redis = require("redis"),
+// client = redis.createClient();
+// const RedisStore = require('connect-redis')(session);
+// //var sessionStore = new redisStore({ client : client });
+// app.use(session({
+//     store: new RedisStore({ client : client }),
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: true
+// }));
+//Passport middleware
 
 app.use(_passport.default.initialize());
 app.use(_passport.default.session()); // Connect flashhero

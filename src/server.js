@@ -31,14 +31,14 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-// Express session
-// app.use(
-//     session({
-//       secret: 'secret',
-//       resave: true,
-//       saveUninitialized: true
-//     })
-//   );
+//Express session
+app.use(
+    session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+    })
+  );
 
 // SessionStore = require('session-mongoose')(express)
 
@@ -52,19 +52,19 @@ app.use(express.urlencoded({ extended: true }));
 //   secret: 'my secret'
 // }))
 
-const redis = require("redis"),
+// const redis = require("redis"),
 
-client = redis.createClient();
+// client = redis.createClient();
 
-const RedisStore = require('connect-redis')(session);
-//var sessionStore = new redisStore({ client : client });
+// const RedisStore = require('connect-redis')(session);
+// //var sessionStore = new redisStore({ client : client });
  
-app.use(session({
-    store: new RedisStore({ client : client }),
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-}));
+// app.use(session({
+//     store: new RedisStore({ client : client }),
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: true
+// }));
 
 
 //Passport middleware
